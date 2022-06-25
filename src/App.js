@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Search from "./components/Search/Search";
+import Card from "./components/Card/Card";
+
+const DEFAULT_ITEMS_PER_PAGE = 30;
 
 function App() {
+  const [searchResult, setSearchResult] = useState({
+    items: [],
+    total_count: 0,
+  });
+
+  const [itemsPerPage, setItemsPerPage] = useState(30);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Search onSearchFinished={(data) => setSearchResult(data)} />
       </header>
+
+      <main>
+        {searchResult.items.map((searchItem) => (
+          <Card searchItem={searchItem} />
+        ))}
+      </main>
     </div>
   );
 }
