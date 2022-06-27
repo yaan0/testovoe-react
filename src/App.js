@@ -3,14 +3,10 @@ import "./App.css";
 import Search from "./components/Search/Search";
 import Card from "./components/Card/Card";
 
-const DEFAULT_ITEMS_PER_PAGE = 30;
+import { DEFAULT_EMPTY_RESULT } from "./api/getRepositories";
 
 function App() {
-  const [searchResult, setSearchResult] = useState({
-    items: [],
-    total_count: 0,
-  });
-
+  const [searchResult, setSearchResult] = useState(DEFAULT_EMPTY_RESULT);
   const [itemsPerPage, setItemsPerPage] = useState(30);
 
   return (

@@ -1,11 +1,12 @@
 import { useState } from "react";
+import { getGithubRepositories } from "../../api/getRepositories";
 
 const Search = ({ onSearchFinished }) => {
   const [searchPhrase, setSearchPhrase] = useState("");
   const onClick = () => {
-    fetch(`https://api.github.com/search/repositories?q=${searchPhrase}`)
-      .then((response) => response.json())
-      .then((data) => onSearchFinished(data));
+    getGithubRepositories(searchPhrase).then((data) => {
+      onSearchFinished(data);
+    });
   };
 
   return (
